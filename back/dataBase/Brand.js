@@ -2,7 +2,7 @@ const sequelize = require('./db');
 const {DataTypes} = require('sequelize');
 const {Device} = require("./Device");
 
-const Brand = sequelize.define('Brand', {
+const Brand = sequelize.define('brand', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     name: {type: DataTypes.STRING, unique: true, allowNull: false}
 });

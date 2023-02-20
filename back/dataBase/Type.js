@@ -4,7 +4,7 @@ const {Device} = require("./Device");
 const {Brand} = require("./Brand");
 const {TypeBrand} = require("./TypeBrand");
 
-const Type = sequelize.define('Type', {
+const Type = sequelize.define('type', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     name: {type: DataTypes.STRING, unique: true, allowNull: false}
 });

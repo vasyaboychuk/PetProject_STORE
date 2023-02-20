@@ -9,6 +9,7 @@ module.exports = {
             img.mv(path.join(process.cwd(), 'static', fileName));
             //     img.mv(path.resolve(__dirname,'..','static',fileName))
             const device = await Device.create({name, price, brandId, typeId, img: fileName});
+
             res.json(device);
 
         } catch (e) {

@@ -1,8 +1,8 @@
 const express = require('express');
 require('dotenv').config();
 const sequelize = require('./dataBase/db')
-const config = require('./config/configs')
 const models = require('./dataBase/index');
+const config = require('./config/configs')
 const fileUpload = require('express-fileupload');
 
 const userRouter = require('./router/user.router');
@@ -14,6 +14,7 @@ const path = require("node:path");
 
 
 const app = express();
+
 app.use(express.json());
 app.use(fileUpload({}));
 app.use(express.static(path.resolve(__dirname, "static")));

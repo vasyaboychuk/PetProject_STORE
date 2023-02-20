@@ -5,7 +5,8 @@ const {BasketDevice} = require("./BasketDevice");
 const {DeviceInfo} = require("./DeviceInfo");
 
 
-const Device = sequelize.define('Device', {
+
+const Device = sequelize.define('device', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     name: {type: DataTypes.STRING, unique: true, allowNull: false},
     price: {type: DataTypes.INTEGER, allowNull: false},
@@ -19,8 +20,9 @@ Device.hasMany(BasketDevice);
 BasketDevice.belongsTo(Device);
 
 
-Device.hasMany(DeviceInfo,{as:'info'});
+Device.hasMany(DeviceInfo, {as: 'info'});
 DeviceInfo.belongsTo(Device)
+
 
 
 module.exports = {

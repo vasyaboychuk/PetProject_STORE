@@ -10,6 +10,8 @@ const Brand = sequelize.define('Brand', {
 Brand.hasMany(Device);
 Device.belongsTo(Brand);
 
+
+
 module.exports = {
     Brand
 }

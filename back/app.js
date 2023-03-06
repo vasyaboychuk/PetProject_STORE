@@ -34,8 +34,6 @@ app.use((err,req,res,next)=>{
     });
 })
 
-
-
 const start = async () => {
     try {
         await sequelize.authenticate()

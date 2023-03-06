@@ -1,8 +1,13 @@
+const {User} = require("../dataBase/User");
+const oauthService = require('../service/oauth.service');
+const {Basket} = require("../dataBase/Basket");
+
 module.exports = {
     getAllUsers: async (req, res, next) => {
         try {
+            const users=await User.findAll();
 
-            next();
+            res.json(users)
         } catch (e) {
             next(e);
         }
@@ -10,8 +15,12 @@ module.exports = {
     },
     createUser:async(req,res,next)=>{
     try{
+        const hashPassword= await oauthService.hashPassword(req.body.password);
+        const newUser=await User.create({...req.body,password:hashPassword});
 
-        next();
+        const basket=await Basket.create({userId:newUser.id})
+        res.status(201).json(newUser)
+
      }catch(e){
        next(e);
      }

@@ -19,5 +19,15 @@ module.exports = {
             next(e);
         }
 
+    },
+    deleteBrandById:async(req,res,next)=>{
+    try{
+        const {id} = req.params;
+        await  Brand.destroy({where:{id}})
+        res.json("deleted")
+     }catch(e){
+       next(e);
+     }
+
     }
 }

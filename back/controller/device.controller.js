@@ -1,6 +1,7 @@
 const path = require("node:path");
 const {Device} = require("../dataBase/Device");
 const {DeviceInfo} = require('../dataBase/DeviceInfo');
+const {where} = require("sequelize");
 module.exports = {
     createDevice: async (req, res, next) => {
         try {
@@ -11,12 +12,12 @@ module.exports = {
             //     img.mv(path.resolve(__dirname,'..','static',fileName))
             const device = await Device.create({name, price, brandId, typeId, img: fileName});
 
-            if(info){
-               let newInfo=JSON.parse(info)
-                newInfo.forEach(i=>DeviceInfo.create({
-                    title:i.title,
-                    description:i.description,
-                    deviceId:device.id
+            if (info) {
+                let newInfo = JSON.parse(info)
+                newInfo.forEach(i => DeviceInfo.create({
+                    title: i.title,
+                    description: i.description,
+                    deviceId: device.id
                 }))
             }
 
@@ -57,17 +58,28 @@ module.exports = {
 
     },
     getOneById: async (req, res, next) => {
-        try{
+        try {
             const {id} = req.params;
-            const device= await Device.findOne(
+            const device = await Device.findOne(
                 {
-                    where:{id},
-                    include:[{model:DeviceInfo,as:'info'}]
+                    where: {id},
+                    include: [{model: DeviceInfo, as: 'info'}]
                 })
 
             res.json(device)
-        }catch (e){
+        } catch (e) {
             next(e)
+        }
+
+    },
+    deleteById: async (req, res, next) => {
+        try {
+            const {id} = req.params;
+            await Device.destroy({where:{id}});
+
+            res.json('deleted')
+        } catch (e) {
+            next(e);
         }
 
     }

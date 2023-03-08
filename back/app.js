@@ -10,6 +10,7 @@ const typeRouter = require('./router/type.router');
 const deviceRouter = require('./router/device.router');
 const brandRouter = require('./router/brand.router');
 const authRouter = require('./router/auth.router');
+const ratingRouter = require('./router/rating.router');
 const path = require("node:path");
 
 
@@ -25,6 +26,7 @@ app.use('/brand', brandRouter);
 app.use('/type', typeRouter);
 app.use('/device', deviceRouter);
 app.use('/auth', authRouter);
+app.use('/rating',ratingRouter);
 
 app.use((err,req,res,next)=>{
     res.status(err.status || 500).json({
